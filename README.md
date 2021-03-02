@@ -1,3 +1,3 @@
 # exam-prepare
 
-For the students, by the students
+For the students, by the students.
