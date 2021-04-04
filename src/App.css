@@ -1,6 +1,6 @@
+
 .App {
 	overflow-x: hidden;
-	overflow-y: hidden;
 }
 
 .Auth {
@@ -12,6 +12,10 @@ body {
 }
 
 .EntryTable, .CreateQuiz, .CreateResource, .RemixQuiz, .RemixResource, .Comments{
+	margin-top: 4em;
+}
+
+.EntryOptions{
 	margin-top: 4em;
 }
 

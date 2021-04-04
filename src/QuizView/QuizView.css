@@ -1,8 +1,9 @@
-.creator {
-	margin-top: 1em;
-}
 
 
 .clock {
 	display: inline;
+}
+
+body {
+	padding-bottom: 10em;
 }
