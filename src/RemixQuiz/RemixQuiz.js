@@ -21,7 +21,7 @@ class RemixQuiz extends Component {
 	constructor(props){
 		super(props);
 
-		//Variable storing quizQuestions from original quiz
+		//UNPLANNED: Variable storing quizQuestions from original quiz
 		const receivedQuestions = this.props.entries[this.props.entryKey].quizQuestions;
 
 		this.state = {
@@ -151,7 +151,11 @@ class RemixQuiz extends Component {
 			alert("Only a maximum of 10 characters are allowed for subject.");
 		}else if(blank == true){
 			alert("You left a field blank");
+
+		//If all the input fields are ok...
 		}else{
+
+			//Make a POST request to the server using the inputted values from the user
 			fetch('http://localhost:27017/newEntry', {
 	  			method: 'post',
 	  			headers: {'Content-Type': 'application/json'},
@@ -169,8 +173,10 @@ class RemixQuiz extends Component {
 	  			})
 	  		}).then(response => response.json())
 			.then(entry => {
+
+				//If submitting the new entry to the server was successful, log a response to the console
 			    if(entry){
-			    	console.log('nice');
+			    	console.log('worked');
 			    }
 			})
 

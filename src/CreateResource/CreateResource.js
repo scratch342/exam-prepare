@@ -31,11 +31,11 @@ class CreateResource extends Component {
 
 		//State object
 		this.state = {
-			//The state of the WYSIWYG editor
-			editorState: EditorState.createEmpty(),	
+			
+			editorState: EditorState.createEmpty(),	//TECHNICALLY UNPLANNED: The state of the WYSIWYG editor
 
-			//Raw HTML values of the input for the values of the resource
-			resourceValues: '',
+			
+			resourceValues: '', //Raw HTML values of the input for the values of the resource
 
 			//Information for the resource that will be displayed in the EntryTable
 			yearLevel : '',
@@ -79,9 +79,9 @@ class CreateResource extends Component {
 	onSubmitNewResource = (e) => {
 
 		console.log(this.textarea.current.value.length);
-
-		//Makes local entries array
 		e.preventDefault();
+
+		//UNPLANNED: Make local entries array and assign the value of the textarea to a local variable
 		const a = this.textarea.current.value;
 		const entries = this.props.entries;
 
@@ -103,19 +103,22 @@ class CreateResource extends Component {
 		else if(this.state.yearLevel.length > 2){
 			alert("Only a maximum of 2 characters are allowed for year level.");
 		}
-
 		else if(this.state.description.length > 50){
 			alert("Only a maximum of 50 characters are allowed for description.")
 		}
-
 		else if(this.state.topic.length > 10){
 			alert("Only a maximum of 10 characters are allowed for topic.");
 		}
-
 		else if(this.state.subject.length > 10){
 			alert("Only a maximum of 10 characters are allowed for subject.");
+
+
 		}else{
+
+		//If inputs are valid then assign value of the state variable resourceValues to temp variable storing value of textarea
 		this.setState({resourceValues: a}, () => {
+
+			//Make a POST request to the server, sending the new resource to the entries array on the server
 			fetch('http://localhost:27017/newEntry', {
 	  			method: 'post',
 	  			headers: {'Content-Type': 'application/json'},
@@ -133,6 +136,8 @@ class CreateResource extends Component {
 	  			})
 	  		}).then(response => response.json())
 			.then(entry => {
+
+				//If sending the entry to the server was successful, log a response to the console
 			    if(entry){
 			    	console.log('nice');
 			    }

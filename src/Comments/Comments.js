@@ -20,8 +20,8 @@ class Comments extends Component {
 
 		//State object
 		this.state = {
-			//Stores the message of the user from the input field
-			message: ''
+			
+			message: '' //TECHNICALLY UNPLANNED: Stores the message of the user from the input field
 		}
 	}
 
@@ -46,18 +46,23 @@ class Comments extends Component {
 	//When a new comment is submitted using the submit button
 	onSubmitComment = () => {
 
-		//Create a new comment object that contains the name of the author and the message
+		//UNPLANNED: Create a new comment object that contains the name of the author and the message
 		const comment = {
 			author: this.props.user.name,
 			message: this.state.message
 		}
 
+		//UNPLANNED: temporary variable storing the contents of the entries array received from props
 		const entries = this.props.entries;
+
+		//Pushing the comment object to the comments array in the appropriate entry
 		entries[this.props.currentEntryKey].comments.push(comment) 
 
-		//Check to see if empty
+		//Check to see if message is empty, and alerting user if so
 		if(this.state.message == ''){
 			alert("Message is empty.");
+
+		//Sends a PUT command to the server
 		}else{
 	 		fetch('http://localhost:27017/newComment', {
 	  			method: 'put',
@@ -68,6 +73,8 @@ class Comments extends Component {
 	  			})
 	  		}).then(response => response.json())
 			.then(entry => {
+
+				//Updates the entry that had a comment added to it with the updated entry from the server
 				entries[this.props.currentEntryKey] = entry; 
 				
 			})			

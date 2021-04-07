@@ -21,7 +21,7 @@ class CreateQuiz extends Component {
 
 		//State object
 		this.state = {
-			//Array for number of HTML inputs when adding questions to quiz
+			//TECHNICALLY UNPLANNED: Array for number of HTML inputs when adding questions to quiz
 			htmlInputs: [],
 
 			//Array storing objects of question and answer
@@ -77,7 +77,7 @@ class CreateQuiz extends Component {
 
 	//When question input field changes
 	onQuestionChange = (e) => {
-		const i = e.target.getAttribute('data-key');
+		const i = e.target.getAttribute('data-key'); //TECHNICALLY UNPLANNED: Stores the index of the element
 		console.log(e.target.getAttribute('data-key'));
 
 		//Update appropriate object in array and push to state array
@@ -88,7 +88,7 @@ class CreateQuiz extends Component {
 
 	//When answer input field changes
 	onAnswerChange = (e) => {
-		const i = e.target.getAttribute('data-key');
+		const i = e.target.getAttribute('data-key'); //TECHNICALLY UNPLANNED: Stores the index of the element
 		console.log(e.target.getAttribute('data-key'));
 
 		//Update appropriate object in array and push to state array
@@ -136,24 +136,24 @@ class CreateQuiz extends Component {
 		else if(this.state.time.length > 3){
 			alert("Only a maximum of 3 characters are allowed for time limit.");
 		}
-
 		else if(this.state.yearLevel.length > 2){
 			alert("Only a maximum of 2 characters are allowed for year level.");
 		}
-
 		else if(this.state.description.length > 50){
 			alert("Only a maximum of 50 characters are allowed for description.")
 		}
-
 		else if(this.state.topic.length > 10){
 			alert("Only a maximum of 10 characters are allowed for topic.");
 		}
-
 		else if(this.state.subject.length > 10){
 			alert("Only a maximum of 10 characters are allowed for subject.");
 		}else if(blank == true){
 			alert("You left a field blank");
+
+		//If inputs are all valid...
 		}else{
+
+			//Make a POST request to the server with the values of the quiz inputted by user
 			fetch('http://localhost:27017/newEntry', {
 	  			method: 'post',
 	  			headers: {'Content-Type': 'application/json'},
@@ -171,8 +171,10 @@ class CreateQuiz extends Component {
 	  			})
 	  		}).then(response => response.json())
 			.then(entry => {
+
+				//If sending the quiz to the database was successful, log a response to the console
 			    if(entry){
-			    	console.log('nice');
+			    	console.log('worked');
 			    }
 			})
 

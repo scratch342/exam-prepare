@@ -28,11 +28,11 @@ class Auth extends Component {
 
     	//The state object
     	this.state = {
-    		//Stores the values of the inputs for email and password when logging in
+    		//TECHNICALLY UNPLANNED: Stores the values of the inputs for email and password when logging in
       		loginEmail: '',
       		loginPassword: '',
 
-      		//Stores the values of the inputs for name, email and password when logging in
+      		//TECHNICALLY UNPLANNED: Stores the values of the inputs for name, email and password when logging in
       		registerName: '',
       		registerEmail: '',
       		registerPassword: ''
@@ -68,6 +68,7 @@ class Auth extends Component {
   	//When submit button for login is clicked
   	onSubmitLogin = () => {
   		
+  		//Make a post request to the server using the user's inputted details
  		fetch('http://localhost:27017/signin', {
   			method: 'post',
   			headers: {'Content-Type': 'application/json'},
@@ -78,11 +79,17 @@ class Auth extends Component {
   		}).then(response => response.json())
 		.then(user => {
 			
+			//If the user was found and there was no error...
 		    if(user != "Unable to sign in; wrong credentials"){
 		    	console.log(user._id);
+
+		    	//Load the user into the state user object in App.js (the parent component)
 		      	this.props.onLoadUser(user);
+
+		      	//Move to the home page
 				this.props.onRouteChange('search');
 
+			//If the user was not found then alert the user instead
 		    }else{
 		    	alert('Not found');
 		    }
@@ -94,9 +101,12 @@ class Auth extends Component {
   	onSubmitRegister = () => {
   		//Create a new user object with the values from the input fields
 
+  		//String used for testing whether the email field is valid
   		let re = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
+  		//If the email is valid...
   		if(re.test(this.state.registerEmail)){
+  			//Make a post request to the server using the user's inputted values
 	  		fetch('http://localhost:27017/register', {
 	  			method: 'post',
 	  			headers: {'Content-Type': 'application/json'},
@@ -107,15 +117,25 @@ class Auth extends Component {
 	  			})
 	  		}).then(response => response.json())
 			.then(user => {
+
+				//If the email does not already exist...
 			    if(user != "Unable to sign in; existing user"){
+			    		//Load the user into the state user object in App.js (the parent component)
 					  this.props.onLoadUser(user[0]);
+
+					  //Move to the home page
 					  this.props.onRouteChange('search');
+
+				//If the email already exists, alert the user instead
 			    }else{
 			    	alert("Unable to sign in: existing email");
 			    }
 			})
+		//If any fields are left blank, then alert the user
   		}else if(this.state.registerName == '' || this.state.registerPassword == '' || this.state.registerName == ''){
   			alert("You have left a field blank.");
+
+  		//If the email inputted is invalid, then alert the user
   		}else{
   			alert("Invalid email address");
   		}

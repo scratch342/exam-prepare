@@ -1,3 +1,9 @@
+//STARTING NOTE: Due to the nature of React, many of the child components will have many technically unplanned state variables.
+//The planning of these state variables is very difficult to foresee as they are not really exactly like normal variables.
+//However, for convenience and clarity, I will refer to these unanticipated state variables as "TECHNICALLY UNPLANNED"
+//Similarly, there are many temporary local variables used in functions which were difficult to forsee (such as simple booleans)
+//I will refer to these variables as "UNPLANNED"
+
 //Importing the essential React libraries
 import React, {Component} from 'react';
 
@@ -39,27 +45,28 @@ class App extends Component {
     //This also means that these "state" variables can only be edited in the component they belong to
     //However, when the state variables change, they will also change for the child component using them
     this.state = {
-      //This is like the index of which entry is currently being used (from the entries array below)
-      currentEntryKey: '',
+      
+      currentEntryKey: '', //UNPLANNED: The index of which entry is currently being used (from the entries array below)
 
-      //This stores the altered time limit for a quiz that the user may select
-      alteredTime: '',
+      
+      alteredTime: '', //UNPLANNED: This stores the altered time limit for a quiz that the user may select
 
       //This entries array stores each entry as an object
       entries: [
-        { 
-          type: 'Quiz',
-          yearLevel: '9',
-          subject: 'Maths',
-          topic: 'Quadratics',
-          description: 'A quiz on finding the intercepts of quadratic equations.',
-          time: '1',
-          creator: 'Jake',
-          resourceValues: '',
-          quizQuestions: [
-            {
-              question: 'Find the y-intercept of y = x^2 + 3',
-              answer: '3'
+        { //entryInfo object (not explicitly named entryInfo)
+          //This is a "place-holder" entry 
+          type: 'Quiz', //The type of entry: quiz or resource
+          yearLevel: '9', //The year level for the entry
+          subject: 'Maths', //The subject of the entry
+          topic: 'Quadratics', //The topic of the entry
+          description: 'A quiz on finding the intercepts of quadratic equations.', //The description of the entry
+          time: '1', //The time limit (for quizzes)
+          creator: 'Jake', //The creator of the quiz
+          resourceValues: '', //The HTML values for the entry (for resources)
+          quizQuestions: [ //The quizQuestions array that stores question and answer pairs (for quizzes)
+            { //quizQuestion object (not explicitly named quizQuestion)
+              question: 'Find the y-intercept of y = x^2 + 3', //The question
+              answer: '3' //The answer to the above question
             },
             {
               question: 'Find the y-intercept of y = x^2 + 6',
@@ -70,23 +77,24 @@ class App extends Component {
               answer: '9'
             }
           ],
-          comments: [
+
+          comments: [ //UNPLANNED: comments array that stores the comments for each entry
             {
-              author: 'Megan',
-              message: 'Thank you so much!'
+              author: 'Megan', //The author of the comment
+              message: 'Thank you so much!' //The message that they sent
             }
           ]
         },
       ],
 
-      //This state variable is for routing; its value decides which components are displayed
+      //UNPLANNED: This state variable is for routing; its value decides which components are displayed
       route: 'auth',
 
       //This stores the information for the user currently logged in as an object
       user: {
-        name: '',
-        email: '',
-        password: ''
+        name: '', //The name of the user
+        email: '', //The email of the user
+        password: '' //The password of the user (encrypted from the server)
       }
     }
   }

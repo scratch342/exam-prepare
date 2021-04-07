@@ -24,8 +24,10 @@ class QuizView extends Component {
 		//References the input field
 		this.input = React.createRef();
 
-		//Checks to see if time limit was altered and if it was, makes it equal to the altered time
+		
 		var time = ''; //UNPLANNED VARIABLE: variable that is used to store the timeLimit
+
+		//Checks to see if time limit was altered and if it was, makes it equal to the altered time
 		if(this.props.alteredTime == ''){
 			time = this.props.entries[this.props.entryKey].time;
 
@@ -40,16 +42,16 @@ class QuizView extends Component {
 
 		//The state object
 		this.state = {
-			//Index of quizQuestions array
+			//TECHNICALLY UNPLANNED: Index of quizQuestions array
 			index: 0,
 
-			//The timeLimit
+			//TECHNICALLY UNPLANNED: The timeLimit
 			timeUsed: time,
 
-			//Boolean checking if the quiz has been completed
+			//TECHNICALLY UNPLANNED: Boolean checking if the quiz has been completed
 			finished: false,
 
-			//Stores the answer of the user in the input field
+			//TECHNICALLY UNPLANNED: Stores the answer of the user in the input field
 			answer: '',
 
 			//Stores the number of correct and incorrect answers
@@ -64,8 +66,8 @@ class QuizView extends Component {
 		//Clears the input field
 		this.input.current.value = "";
 
-		//Assigns the value of the index to a variable
-		var currentIndex = this.state.index;
+		
+		var currentIndex = this.state.index; //UNPLANNED VARIABLE: Assigns the value of the index to a variable
 
 		//Checks if on last question
 		if(this.state.index == (this.props.entries[this.props.entryKey].quizQuestions.length-1) && 
@@ -104,6 +106,8 @@ class QuizView extends Component {
 				currentIncorrectAnswers++;
 				this.setState({incorrectAnswers: currentIncorrectAnswers});		
 			}
+
+			//Goes to the next question
 			currentIndex++;
 			this.setState({index: currentIndex});
 		}else if(this.state.finished == true) {

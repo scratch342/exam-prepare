@@ -29,7 +29,7 @@ class RemixResource extends Component {
 
 		//State object
 		this.state = {
-			//The state of the WYSIWYG editor, initialised with the values from the original resource
+			//TECHNICALLY UNPLANNED: The state of the WYSIWYG editor, initialised with the values from the original resource
 			editorState: EditorState.createWithContent(ContentState.createFromBlockArray(
 				convertFromHTML(JSON.stringify(this.props.entries[this.props.entryKey].resourceValues)))),
 			//Raw HTML values of the input for the values of the resource
@@ -78,9 +78,9 @@ class RemixResource extends Component {
 	onSubmitNewResource = (e) => {
 
 		console.log(this.textarea.current.value.length);
-
-		//Makes local entries array
 		e.preventDefault();
+
+		//UNPLANNED: Make local entries array and assign the value of the textarea to a local variable
 		const a = this.textarea.current.value;
 		const entries = this.props.entries;
 
@@ -114,7 +114,11 @@ class RemixResource extends Component {
 		else if(this.state.subject.length > 10){
 			alert("Only a maximum of 10 characters are allowed for subject.");
 		}else{
+
+		//If inputs are valid then assign value of the state variable resourceValues to temp variable storing value of textarea
 		this.setState({resourceValues: a}, () => {
+
+			//Make a POST request to the server, sending the new resource to the entries array on the server
 			fetch('http://localhost:27017/newEntry', {
 	  			method: 'post',
 	  			headers: {'Content-Type': 'application/json'},
@@ -132,8 +136,10 @@ class RemixResource extends Component {
 	  			})
 	  		}).then(response => response.json())
 			.then(entry => {
+
+				//If sending the entry to the server was successful, log a response to the console
 			    if(entry){
-			    	console.log('nice');
+			    	console.log('worked');
 			    }
 			})
 		});
