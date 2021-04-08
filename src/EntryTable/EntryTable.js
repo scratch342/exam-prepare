@@ -28,7 +28,7 @@ class EntryTable extends Component {
 	componentDidMount(){
 
 			//Fetch entries from the server using GET request
-			fetch('http://localhost:27017/getEntries', {
+			fetch('https://morning-thicket-00539.herokuapp.com/getEntries', {
 	  			method: 'get',
 	  			headers: {'Content-Type': 'application/json'}
 	  		}).then(response => response.json())

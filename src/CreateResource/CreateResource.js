@@ -119,7 +119,7 @@ class CreateResource extends Component {
 		this.setState({resourceValues: a}, () => {
 
 			//Make a POST request to the server, sending the new resource to the entries array on the server
-			fetch('http://localhost:27017/newEntry', {
+			fetch('https://morning-thicket-00539.herokuapp.com/newEntry', {
 	  			method: 'post',
 	  			headers: {'Content-Type': 'application/json'},
 	  			body: JSON.stringify({

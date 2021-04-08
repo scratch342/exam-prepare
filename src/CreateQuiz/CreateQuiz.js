@@ -154,7 +154,7 @@ class CreateQuiz extends Component {
 		}else{
 
 			//Make a POST request to the server with the values of the quiz inputted by user
-			fetch('http://localhost:27017/newEntry', {
+			fetch('https://morning-thicket-00539.herokuapp.com/newEntry', {
 	  			method: 'post',
 	  			headers: {'Content-Type': 'application/json'},
 	  			body: JSON.stringify({

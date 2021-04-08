@@ -27,6 +27,9 @@ class Comments extends Component {
 
 	//When the back button is clicked
 	onBack = () => {
+
+	console.log(this.props.currentEntryKey);	
+	console.log(this.props.entries);	
 	//If the entry is a resource, go back to "resource-view"
 	if(this.props.entries[this.props.currentEntryKey].type == 'Resource'){
 		this.props.onRouteChange('resource-view');
@@ -58,13 +61,14 @@ class Comments extends Component {
 		//Pushing the comment object to the comments array in the appropriate entry
 		entries[this.props.currentEntryKey].comments.push(comment) 
 
+
 		//Check to see if message is empty, and alerting user if so
 		if(this.state.message == ''){
 			alert("Message is empty.");
 
 		//Sends a PUT command to the server
 		}else{
-	 		fetch('http://localhost:27017/newComment', {
+	 		fetch('https://morning-thicket-00539.herokuapp.com/newComment', {
 	  			method: 'put',
 	  			headers: {'Content-Type': 'application/json'},
 	  			body: JSON.stringify({
@@ -75,15 +79,14 @@ class Comments extends Component {
 			.then(entry => {
 
 				//Updates the entry that had a comment added to it with the updated entry from the server
-				entries[this.props.currentEntryKey] = entry; 
+				
+				this.props.onUpdateEntries(entries);
 				
 			})			
 		}
 
 
-
-		//Update the entries array from props with the new comment
-		this.props.onUpdateEntries(entries);
+		console.log(this.props.entries[this.props.currentEntryKey].comments);
 
 
 

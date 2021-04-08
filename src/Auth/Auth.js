@@ -69,7 +69,7 @@ class Auth extends Component {
   	onSubmitLogin = () => {
   		
   		//Make a post request to the server using the user's inputted details
- 		fetch('http://localhost:27017/signin', {
+ 		fetch('https://morning-thicket-00539.herokuapp.com/signin', {
   			method: 'post',
   			headers: {'Content-Type': 'application/json'},
   			body: JSON.stringify({
