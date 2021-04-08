@@ -107,7 +107,7 @@ class Auth extends Component {
   		//If the email is valid...
   		if(re.test(this.state.registerEmail)){
   			//Make a post request to the server using the user's inputted values
-	  		fetch('http://localhost:27017/register', {
+	  		fetch('https://morning-thicket-00539.herokuapp.com/register', {
 	  			method: 'post',
 	  			headers: {'Content-Type': 'application/json'},
 	  			body: JSON.stringify({
